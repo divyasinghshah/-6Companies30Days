@@ -1,0 +1,29 @@
+ull getNthUglyNo(int n) {
+	    // code here
+	    
+	    vector<long> ugly(n);
+	    long i2=0;
+	    long i3=0;
+	    long i5=0;
+	    long nm2,nm3,nm5,minimum;
+	    ugly[0]=1;
+	    for(long i=1;i<n;i++){
+	        nm2=ugly[i2]*2;
+	        nm3=ugly[i3]*3;
+	        nm5=ugly[i5]*5;
+	        minimum=min({nm2,nm3,nm5});
+	        ugly[i]=minimum;
+	        if(nm2==minimum){
+	            i2++;
+	        }
+	        if(nm3==minimum){
+	            i3++;
+	        }
+	        if(nm5==minimum){
+	            i5++;
+	        }
+	        
+	    }
+	    return ugly[n-1];
+	}
+};
