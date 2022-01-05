@@ -1,0 +1,22 @@
+string encode(string src)
+{     
+  //Your code here 
+  int i=0;
+  string ans="";
+  while(i<src.size()){
+      int j=i;
+      int count=0;
+      while(src[i]==src[j]){
+          j++;
+          count++;
+      }
+      ans+=src[i];
+      ans+=char(count+'0');
+      i=j;
+  }
+ 
+  
+  
+  
+  return ans;
+} 
