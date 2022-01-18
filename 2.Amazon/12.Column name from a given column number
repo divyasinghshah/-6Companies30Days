@@ -1,0 +1,18 @@
+class Solution{
+    public:
+    string colName (long long int n)
+    {
+        // your code here
+        string temp="";
+        while(n!=0){
+            n--;
+            int r=n%26;
+            char ch= r+'A';
+            temp=ch+temp;
+            
+            n=n/26;
+        }
+        
+        return temp;
+    }
+};
