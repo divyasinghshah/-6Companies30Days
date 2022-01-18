@@ -1,0 +1,33 @@
+class Solution{
+public:
+    int isValid(vector<vector<int>> mat){
+        // code here
+        
+      set<string> st;
+        
+        for(int i=0;i<9;i++){
+            for(int  j=0;j<9;j++){
+                if(mat[i][j]!=0){
+                    string r="row"+to_string(i)+ to_string(mat[i][j]);
+                    string c="col"+to_string(j)+ to_string(mat[i][j]);
+                    
+                    int box=(i/3)*3+j/3;
+                    string b="box"+to_string(box)+ to_string(mat[i][j]);
+                    if(st.find(r)!=st.end() || st.find(c)!=st.end() || st.find(b)!=st.end())
+                        return 0;
+                    else{
+                        st.insert(r);
+                        st.insert(c);
+                        st.insert(b);
+                    }
+                }
+            }
+            
+        }
+        
+      
+        
+        return 1;
+        
+    }
+};
