@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        int count=0;
+        int minutes=0;
+        int total=0;
+        
+        queue<pair<int,int>> bfs;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]!=0) total++;
+                if(grid[i][j]==2) bfs.push({i,j});
+            }
+        }
+        
+        
+        int x[4]={1,0,-1,0};
+        int y[4]={0,1,0,-1};
+        
+        
+        while(!bfs.empty()){
+            int k=bfs.size();
+            count+=k;
+            while(k--){
+                int xc=bfs.front().first;
+                int yc=bfs.front().second;
+                bfs.pop();
+                for(int i=0;i<4;i++){
+                    int x2=xc+x[i];
+                    int y2=yc+y[i];
+                    if(x2<0 || y2<0 ||x2>=n || y2>=m || grid[x2][y2]!=1) continue;
+                    grid[x2][y2]=2;
+                    bfs.push({x2,y2});
+                    
+                }
+            }
+            if(!bfs.empty()) minutes++;
+        }
+        
+        if(count==total) return minutes;
+        else return -1;
+        
+    }
+};
