@@ -1,0 +1,53 @@
+class Solution
+{
+   
+    //Function to find list of all words possible by pressing given numbers.
+  
+    
+    
+   public:
+   
+   void printPattern(int index, int n, int arr[], string &ds,  vector<string> &ans, map<int,string> & mp){
+        if(index>=n){
+            ans.push_back(ds);
+            return;
+        }
+        
+        string alpha=mp[arr[index]];
+        for(int i=0;i<alpha.length();i++){
+            ds.push_back(alpha[i]);
+            printPattern(index+1,n,arr,ds,ans,mp);
+            ds.pop_back();
+        }
+    }
+  
+   vector<string> possibleWords(int a[], int n)
+   {
+       
+       
+       
+       vector<string> ans;
+       
+       if(n == 0)
+       return ans;
+       
+      map <int,string> mp;
+      mp[2]="abc";
+      mp[3]="def";
+      mp[4]="ghi";
+      mp[5]="jkl";
+      mp[6]="mno";
+      mp[7]="pqrs";
+      mp[8]="tuv";
+      mp[9]="wxyz";
+       
+       
+       
+       
+       
+       string ds;
+       printPattern(0 , n , a , ds , ans,mp);
+       
+       return ans;
+   }
+};
