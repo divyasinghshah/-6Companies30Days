@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+    
+    int dp[10001];
+    int solve(int a[],int i){
+        if(i<0)
+            return 0;
+        if(dp[i]!=-1)
+            return dp[1];
+        
+        int op1= a[i]+solve(a,i-2);
+        int op2=solve(a,i-1);
+        return dp[i]=max(op1,op2);
+    }
+    //Function to find the maximum money the thief can get.
+    int FindMaxSum(int arr[], int n)
+    {
+        // Your code here
+        memset(dp,-1,sizeof(dp));
+        return solve(arr,n-1);
+    }
+};
