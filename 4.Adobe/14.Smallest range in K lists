@@ -1,0 +1,48 @@
+class Solution{
+    public:
+    pair<int,int> findSmallestRange(int KSortedArray[][N], int n, int k)
+    {
+          //code here
+        
+           vector<pair<int,int>> a;
+          for(int i=0;i<k;i++){
+              for(int j=0;j<n;j++){
+                  a.push_back({KSortedArray[i][j],i});
+              }
+          }
+          
+          sort(a.begin(),a.end());
+          int minimum=INT_MAX;
+          int mp[k];
+          int total=0;
+          int j=0;
+          pair<int,int> ans;
+        // vector<int> ans;
+          memset(mp,0,sizeof(mp));
+          
+          for(int i=0;i<a.size();i++){
+              mp[a[i].second]++;
+              if(mp[a[i].second]==1) total++;
+              if(total==k){
+                  if(a[i].first-a[j].first+1<minimum){
+                      minimum=a[i].first-a[j].first+1;
+                      ans=make_pair(a[j].first,a[i].first);
+                  }
+              }
+              
+              if(total==k){
+                  while(total==k){
+                      if(mp[a[j].second]>1) mp[a[j].second]--,j++;
+                      else
+                        break;
+                  }
+                  if(a[i].first-a[j].first+1<minimum){
+                      minimum=a[i].first-a[j].first+1;
+                      ans=make_pair(a[j].first,a[i].first);
+                  }
+              }
+          }
+          
+          return ans;
+    }
+};
