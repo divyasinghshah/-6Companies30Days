@@ -1,0 +1,13 @@
+int dp[501][501];
+    int solve(int i,int j,vector<int> &piles,int sum){
+        if(i > j) return 0;
+        else if(dp[i][j] != -1) return dp[i][j];
+        
+        int option1 = piles[i] + min(solve(i+2,j,piles,sum) , solve(i+1,j-1,piles,sum));
+        
+        int option2 = piles[j] + min(solve(i+1,j-1,piles,sum) , solve(i,j-2,piles,sum));
+        
+        int alice = max(option1,option2);
+        
+        return dp[i][j] = alice;
+    }
