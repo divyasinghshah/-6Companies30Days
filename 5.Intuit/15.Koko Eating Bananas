@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool canEatInTime(vector<int> &piles, int k,int h){
+        int hr=0;
+        for(int pile:piles){
+            int div=pile/k;
+            hr+=div;
+            if(pile%k!=0)hr++;
+        }
+        return hr<=h;
+    }
+    
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int l=1;
+        int maximum=piles[0];
+        
+        for(int i=1;i<piles.size();i++){
+            maximum=max(maximum,piles[i]);
+        }
+        
+        int r=maximum;
+        while(l<=r)
+        {
+            int mid=l+(r-l)/2;
+            if(canEatInTime(piles,mid,h))r=mid-1;
+            else
+                l=mid+1;
+        }
+        return l;
+    }
+};
