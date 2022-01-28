@@ -1,0 +1,55 @@
+class Solution {
+public:
+    
+    bool isValid(int mid,vector<int>& weights,int D){
+        int n=weights.size();
+        int days=1;
+        int total=0;
+       
+        for(int i=0;i<n;i++){
+            total+=weights[i];
+            if(total>mid){
+                days++;
+                total=weights[i];
+            }
+                
+            if(days>D)
+                return false;
+        }
+        
+        
+       return true;
+        
+    }
+    int sum(vector<int> weights){
+        int s=0;
+        for(int i=0;i<weights.size();i++){
+            s+=weights[i];
+        }
+        return s;
+        
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n=weights.size();
+        int maximum=weights[0];
+        for(int i=1;i<n;i++){
+            maximum=max(maximum,weights[i]);
+        }
+        int s=maximum;
+        int e=sum(weights);
+        
+        int ans=-1;
+        
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(isValid(mid,weights,days)){
+                ans=mid;
+                e=mid-1;
+                
+            
+            }else
+                s=mid+1;
+        }
+        return ans;
+    }
+};
